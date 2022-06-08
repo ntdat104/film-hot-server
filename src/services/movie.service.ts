@@ -12,4 +12,17 @@ export class MovieService {
       .get(`/movieDrama/get?id=${id}&category=${category}`)
       .pipe(map((response) => response.data));
   }
+
+  getMovieMedia(
+    category: number,
+    contentId: number,
+    episodeId: number,
+    definition: string,
+  ): Observable<AxiosResponse<any>> {
+    return this.httpService
+      .get(
+        `/media/previewInfo?category=${category}&contentId=${contentId}&episodeId=${episodeId}&definition=${definition}`,
+      )
+      .pipe(map((response) => response.data));
+  }
 }
