@@ -1,6 +1,7 @@
+import { CategoryDto } from '@/dtos/preview/category-dto';
 import { PreviewVideosQuery } from '@/interfaces/preview/preview-videos-query';
 import { PreviewService } from '@/services/preview.service';
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 
@@ -15,5 +16,12 @@ export class PreviewController {
     console.log(previewVideosQuery);
     const { page = 0 } = previewVideosQuery;
     return this.previewService.getPreviewVideos(page);
+  }
+
+  @Post('preview-video-media')
+  getPreviewVideoMedia(
+    @Body() categoryDto: CategoryDto[],
+  ): Observable<AxiosResponse<any>> {
+    return this.previewService.getPreviewVideoMedia(categoryDto);
   }
 }
